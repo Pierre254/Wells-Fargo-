@@ -2,7 +2,6 @@ package com.wellsfargo.counselor.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 public class Security {
@@ -11,8 +10,8 @@ public class Security {
     @GeneratedValue()
     private long securityId;
 
-    @ManyToMany(mappedBy = "security")
-    private List<Portfolio> portfolios;
+    @ManyToOne
+    private Portfolio portfolios;
 
     @Column(nullable = false)
     private String name;
@@ -29,7 +28,11 @@ public class Security {
     @Column(nullable = false)
     private String quantity;
 
-    public Security(List<Portfolio> portfolios, String name, String category, String purchasePrice, String purchaseData, String quantity) {
+    public Security(){
+
+    }
+
+    public Security(Portfolio portfolios, String name, String category, String purchasePrice, String purchaseData, String quantity) {
         this.portfolios = portfolios;
         this.name = name;
         this.category = category;
@@ -42,11 +45,11 @@ public class Security {
         return securityId;
     }
 
-    public List<Portfolio> getPortfolios() {
+    public Portfolio getPortfolios() {
         return portfolios;
     }
 
-    public void setPortfolios(List<Portfolio> portfolios) {
+    public void setPortfolios(Portfolio portfolios) {
         this.portfolios = portfolios;
     }
 
@@ -90,3 +93,4 @@ public class Security {
         this.quantity = quantity;
     }
 }
+

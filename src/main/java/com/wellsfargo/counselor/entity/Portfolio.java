@@ -2,7 +2,6 @@ package com.wellsfargo.counselor.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 public class Portfolio {
@@ -11,23 +10,19 @@ public class Portfolio {
     @GeneratedValue()
     private long portfolioId;
 
-    @ManyToMany(mappedBy = "portfolio")
-    private List<Client> clientList;
+    @ManyToOne
+    private Client client;
 
     @Column(nullable = false)
     private String creationDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "portfolio_security",
-            joinColumns = @JoinColumn(name = "security_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "portfolio_id",
-                    referencedColumnName = "id"))
-        private List<Security> securities;
+    public Portfolio(){
 
-    public Portfolio(String creationDate, List<Client> clientList, List<Security> securities) {
+    }
+
+    public Portfolio(String creationDate, Client client) {
         this.creationDate = creationDate;
-        this.clientList = clientList;
-        this.securities = securities;
+        this.client = client;
     }
 
     public long getPortfolioId() {
@@ -42,19 +37,11 @@ public class Portfolio {
         this.creationDate = creationDate;
     }
 
-    public List<Client> getClientList() {
-        return clientList;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientList(List<Client> clientList) {
-        this.clientList = clientList;
-    }
-
-    public List<Security> getSecurities() {
-        return securities;
-    }
-
-    public void setSecurities(List<Security> securities) {
-        this.securities = securities;
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

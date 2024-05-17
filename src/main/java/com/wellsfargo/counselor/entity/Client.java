@@ -2,8 +2,6 @@ package com.wellsfargo.counselor.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Client {
     @Id
@@ -24,19 +22,16 @@ public class Client {
     @Column(nullable = false)
     private String address;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "client_portfolio",
-            joinColumns = @JoinColumn(name = "portfolio_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "client_id",
-                    referencedColumnName = "id"))
-    private List<Portfolio> portfolios;
+    public Client(){
 
-    public Client(Advisor advisors, String firstName, String lastName, String address, List<Portfolio> portfolios) {
+    }
+
+    public Client(Advisor advisors, String firstName, String lastName, String address) {
         this.advisors = advisors;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.portfolios = portfolios;
+
     }
 
     public long getClientId() {
@@ -73,13 +68,5 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public List<Portfolio> getPortfolios() {
-        return portfolios;
-    }
-
-    public void setPortfolios(List<Portfolio> portfolios) {
-        this.portfolios = portfolios;
     }
 }
