@@ -1,10 +1,13 @@
 package com.wellsfargo.counselor.entity;
 
 
+import java.awt.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Advisor {
@@ -27,6 +30,9 @@ public class Advisor {
 
     @Column(nullable = false)
     private String email;
+    
+    @OneToMany
+    private List client;
 
     protected Advisor() {
 
@@ -83,4 +89,14 @@ public class Advisor {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public List getClient() {
+		return client;
+	}
+
+	public void setClient(List client) {
+		this.client = client;
+	}
+    
+    
 }
