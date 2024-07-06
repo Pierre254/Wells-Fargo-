@@ -17,7 +17,6 @@ public class Portfolio {
     @Column(nullable = false)
     private Date creationDate;
 
-
     public Portfolio() {
 
     }

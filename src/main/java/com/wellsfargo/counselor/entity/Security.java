@@ -59,6 +59,7 @@ public class Security {
         this.name = name;
     }
 
+
     public String getCategory() {
         return category;
     }
