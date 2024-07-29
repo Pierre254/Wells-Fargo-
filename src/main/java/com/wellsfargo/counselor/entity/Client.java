@@ -8,10 +8,8 @@ public class Client {
     @Id
     @GeneratedValue
     private long clientId;
-
-    @Id
-    @OneToMany
-    private long advisorId;
+    @ManyToOne
+    private Advisor advisor;
 
     @Column(nullable = false)
     private String firstName;
@@ -30,8 +28,11 @@ public class Client {
     public long getClientId() {
         return clientId;
     }
-    public long getAdvisorId() {
-        return advisorId;
+    public Advisor getAdvisor() {
+        return advisor;
+    }
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
     }
 
     public String getFirstName() {
@@ -74,8 +75,13 @@ public class Client {
         this.email = email;
     }
 
+    protected Client() {
 
-    public Client(String firstName, String lastName, String address, String phone, String email) {
+    }
+
+
+    public Client(Advisor advisor, String firstName, String lastName, String address, String phone, String email) {
+        this.advisor =advisor;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

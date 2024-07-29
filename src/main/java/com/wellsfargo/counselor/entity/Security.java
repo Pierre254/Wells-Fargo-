@@ -6,41 +6,38 @@ import jakarta.persistence.*;
 @Entity
 public class Security {
 
-
-
     @Id
     @GeneratedValue
     private long securityId;
 
-    @OneToMany
-    private long portfolioId;
+    @ManyToOne
+    private Portfolio portfolio;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String category;
 
-    @Column
-    private long purchasePrice;
+    @Column(nullable = false)
+    private float purchasePrice;
 
-    @Column
+    @Column(nullable = false)
     private String purchaseDate;
 
-    @Column
-    private long quantity;
+    @Column(nullable = false)
+    private float quantity;
 
     public long getSecurityId() {
         return securityId;
     }
 
-
-    public long getPortfolioId() {
-        return portfolioId;
+    public Portfolio getPortfolio() {
+        return portfolio;
     }
 
-    public void setPortfolioId(long portfolioId) {
-        this.portfolioId = portfolioId;
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
     }
 
     public String getName() {
@@ -59,11 +56,11 @@ public class Security {
         this.category = category;
     }
 
-    public long getPurchasePrice() {
+    public float getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(long purchasePrice) {
+    public void setPurchasePrice(float purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -75,17 +72,20 @@ public class Security {
         this.purchaseDate = purchaseDate;
     }
 
-    public long getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
+    protected Security(){
 
+    }
 
-    public Security(String name, String category, long purchasePrice, String purchaseDate, long quantity){
+    public Security(Portfolio portfolio, String name, String category, float purchasePrice, String purchaseDate, float quantity){
+        this.portfolio = portfolio;
         this.name = name;
         this.category = category;
         this.purchasePrice = purchasePrice;
