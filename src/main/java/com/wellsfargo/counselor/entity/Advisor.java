@@ -1,10 +1,17 @@
 package com.wellsfargo.counselor.entity;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Advisor {
@@ -32,15 +39,21 @@ public class Advisor {
 
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-    }
+    
 
-    public Long getAdvisorId() {
+    public Advisor(String firstName, String lastName, String address, String phone, String email, Set<Client> clients) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.clients = clients;
+	}
+
+
+
+	public Long getAdvisorId() {
         return advisorId;
     }
 
@@ -83,4 +96,10 @@ public class Advisor {
     public void setEmail(String email) {
         this.email = email;
     }
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "advisorId",referencedColumnName = "advisorId")
+    Set<Client> clients=new HashSet<Client>();
+    
+    
+    
 }
