@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,14 +28,16 @@ public class Security {
 	private Date purchaseDate;
 	@Column(nullable = false)
 	private int quantity;
-	public Security(String name, String category, int purchasePrice, Date purchaseDate, int quantity) {
+	public Security(String name, String category, int purchasePrice, Date purchaseDate, int quantity,Portfolio portfolio) {
 		super();
 		this.name = name;
 		this.category = category;
 		this.purchasePrice = purchasePrice;
 		this.purchaseDate = purchaseDate;
 		this.quantity = quantity;
+		this.portfolio=portfolio;
 	}
-	
+	@ManyToOne
+	private Portfolio portfolio;
 	
 }

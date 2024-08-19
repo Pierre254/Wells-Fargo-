@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -30,17 +31,17 @@ public class Client {
 	@Column(nullable = false)
 	private String email;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "client")
-	private Portfolio portfolio;
+	@ManyToOne
+	private Advisor advisor;
 
-	public Client(String firstName, String lastName, String address, String phone, String email, Portfolio portfolio) {
+	public Client(String firstName, String lastName, String address, String phone, String email, Advisor advisor) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
-		this.portfolio = portfolio;
+		this.advisor = advisor;
 	}
 
 	public Client() {

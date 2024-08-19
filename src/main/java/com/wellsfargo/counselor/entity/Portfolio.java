@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -30,26 +31,20 @@ public class Portfolio {
 	private Date creationDate;
 
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "clientId",referencedColumnName = "clientId")
+	@ManyToOne
 	private Client client;
 
 
 	
 	
-	public Portfolio(Date creationDate, Client client, List<Security> securities) {
+	public Portfolio(Date creationDate, Client client) {
 		super();
 		this.creationDate = creationDate;
 		this.client = client;
-		this.securities = securities;
 	}
 
 
 
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "portfolioId",referencedColumnName = "portfolioId")
-	List<Security> securities=new ArrayList<Security>();
 	
 	
 	
